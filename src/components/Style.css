@@ -1,0 +1,15 @@
+table,
+tr,
+th,
+td {
+  border: 1px solid #21293b;
+  padding: 5px 30px;
+}
+
+td,
+th {
+  width: full;
+  white-space: nowrap;
+}
+
+

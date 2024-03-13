@@ -1,0 +1,22 @@
+table,
+tr,
+th,
+td {
+  border: 1px solid #21293b;
+  padding: 5px 30px;
+}
+
+td,
+th {
+  width: full;
+  white-space: nowrap;
+}
+
+#loginPage::after {
+  background: url("./assets/sponser.webp");
+  background-size: cover;
+  /* background-position: 100% 100%; */
+  background-position: center;
+  background-repeat: no-repeat;
+  /* z-index: 100; */
+}

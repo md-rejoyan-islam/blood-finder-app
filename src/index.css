@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+label {
+  color: #b6c0cd;
+  font-weight: 600;
+  padding-bottom: 4px !important;
+}
+
+@layer components {
+  .border-general {
+    @apply border-[#21293b];
+  }
+  .input {
+    @apply focus:outline-none placeholder:text-[#eeeeee3d] focus:ring-2 ring-[#2f83924a] ring-offset-2  ring-offset-transparent;
+  }
+}
+
+/* active link color  */
+.active {
+  background-color: #1f2937;
+}
+
+/* #DataTables_Table_ > * {
+  border: none !important;
+} */
+
+[id^="DataTables_Table_"] {
+  border: none !important;
+}
+.datatable {
+  padding: 12px 0px !important ;
+}
+
+.dataTables_filter label input {
+  border: 1px solid #1c4336 !important;
+}
+.dataTables_filter label input:focus {
+  border: 1px solid #42ac89 !important;
+  outline: none !important;
+}
+.dataTables_filter label {
+  /* color: #47b37b !important; */
+  color: #ffffff !important;
+}
+.dataTables_length label {
+  color: #ffffff !important;
+}
+.dataTables_length,
+.dataTables_filter {
+  padding: 4px 0px !important ;
+  text-align: left !important;
+}
+.dataTables_length label select {
+  border: 1px solid #1c4336 !important;
+  background-color: #0f172a !important ;
+}
+
+.dataTables_paginate .paginate_button {
+  border: 1px solid #1c4336 !important;
+  color: #ffffff !important;
+  border-radius: 4px !important;
+}
+/* .dataTables_paginate > .paginate_button:hover {
+  background-color: #41d4a3 !important ;
+  color: #ffffff !important;
+} */
+
+.dataTables_paginate .current {
+  background-color: #42ac89 !important ;
+  color: #ffffff !important;
+}
+.dataTables_paginate .current:hover {
+  background-color: #41d4a3 !important ;
+}
+
+.summary .dataTables_filter {
+  display: none !important;
+}
+
+@media (max-width: 478px) {
+  .Toastify .Toastify__toast-container {
+    margin: auto;
+  }
+  .Toastify__toast {
+    margin: 10px !important;
+    border-radius: 5px !important;
+  }
+}
+
+.p-checkbox-box.p-component {
+  background-color: #338cb884;
+  color: white;
+}
+
+.p-checkbox-box.p-component:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem #42ac8900;
+}
+
+.p-checkbox-box.p-component .p-icon {
+  color: black !important;
+  height: 15px !important;
+  width: 15px !important;
+  font-weight: 900 !important;
+}

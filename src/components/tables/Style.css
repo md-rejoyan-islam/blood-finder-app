@@ -1,0 +1,64 @@
+.p-datatable-header,
+.p-datatable-wrapper,
+.p-paginator-bottom {
+  background-color: initial;
+  color: white;
+}
+.p-datatable-header {
+  padding: 16px 0;
+}
+
+.p-datatable-wrapper table,
+tr,
+th,
+td {
+  border-color: #21293b;
+  background-color: initial;
+  color: rgb(189, 205, 206);
+  font-size: 14px;
+  text-align: center;
+}
+
+.p-datatable-wrapper tbody tr:nth-child(even):hover {
+  background-color: #48355c;
+  cursor: pointer;
+}
+.p-datatable-wrapper tbody tr:nth-child(odd):hover {
+  background-color: #335542;
+  cursor: pointer;
+}
+.p-icon {
+  color: #64af96;
+  height: 11px;
+}
+
+.p-dropdown {
+  background-color: #21293b;
+  color: white;
+  border-color: #21293b;
+}
+
+span.p-inputtext {
+  color: white;
+}
+
+.p-dropdown-items-wrapper {
+  background-color: #21293b;
+}
+
+.p-dropdown-items-wrapper .p-highlight {
+  background-color: #48355c;
+  color: white;
+}
+
+/* search header  */
+tr[data-pc-section="headerrow"] {
+  background-color: #21293b;
+  color: white;
+}
+[data-pc-section="headercontent"] {
+  justify-content: center;
+}
+.p-sortable-column {
+  color: white !important;
+}
