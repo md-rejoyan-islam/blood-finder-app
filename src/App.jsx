@@ -17,6 +17,10 @@ import {
   setMessageEmpty as donarMessageEmpty,
   getDonars,
 } from "./features/donars/donarsSlice";
+import {
+  getPatientsData,
+  setPatientMessageEmpty,
+} from "./features/patient/patientSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,14 +28,16 @@ function App() {
   const { message: userMessage, error: userError } = useSelector(getUsers);
   const { message: authMessage, error: authError } = useSelector(getAuthData);
   const { message: donarMessage, error: donarError } = useSelector(getDonars);
+  const { message: pateintMessage, error: pateintError } =
+    useSelector(getPatientsData);
 
   useEffect(() => {
     dispatch(loggedInUser());
   }, [dispatch]);
 
   // message
-  const message = userMessage || authMessage || donarMessage;
-  const error = userError || authError || donarError;
+  const message = userMessage || authMessage || donarMessage || pateintMessage;
+  const error = userError || authError || donarError || pateintError;
   useEffect(() => {
     message && toast.success(message);
     error &&
@@ -42,6 +48,7 @@ function App() {
     dispatch(userMessageEmpty());
     dispatch(authMessageEmpty());
     dispatch(donarMessageEmpty());
+    dispatch(setPatientMessageEmpty());
   }, [message, error, dispatch]);
 
   return (

@@ -30,6 +30,23 @@ export default function Login() {
     dispatch(userLogin({ data: fields, clearFields, setLoading }));
   };
 
+  // handle keydown
+  const handleKeyDown = (e) => {
+    // when press enter go to next input
+    if (e.key === "Enter" && e.target.type !== "submit") {
+      e.preventDefault();
+      const form = e.target.form;
+      const index = Array.prototype.indexOf.call(form, e.target);
+      form.elements[index + 1].focus();
+    }
+    // when backspace press go to previous input
+    if (e.key === "Backspace" && e.target.value === "") {
+      e.preventDefault();
+      const form = e.target.form;
+      const index = Array.prototype.indexOf.call(form, e.target);
+      form.elements[index - 1].focus();
+    }
+  };
   return (
     <>
       <Helmet>
@@ -53,6 +70,7 @@ export default function Login() {
               <form
                 className="sm:max-w-[500px] mx-auto  min-w-max sm:min-w-[500px] "
                 onSubmit={handleSubmit}
+                onKeyDown={handleKeyDown}
               >
                 <h1 className="text-2xl font-bold text-[#38bdf8] text-center mb-10">
                   Login

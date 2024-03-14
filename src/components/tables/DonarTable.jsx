@@ -204,7 +204,7 @@ export default function DonarTable() {
   };
 
   //  update last donation date
-  const updateLastDonationDate = (id) => {
+  const updateLastDonationDate = (id, data) => {
     // today date
     const today = new Date().toISOString().split("T")[0];
 
@@ -217,7 +217,12 @@ export default function DonarTable() {
         dispatch(
           updateDonarById({
             id,
-            data: { lastDonationDate: today },
+            data: {
+              lastDonationDate: today,
+              totalDonation: data?.totalDonation
+                ? Number(data?.totalDonation) + 1
+                : 1,
+            },
             setLoading,
           })
         );
@@ -234,7 +239,7 @@ export default function DonarTable() {
       <span className="primary-highlighter font-medium text-white flex items-center gap-2">
         <button
           className="text-[12px] rounded-[4px] px-2 py-[2px] bg-violet-500 hover:bg-blue-500 disabled:bg-slate-600"
-          onClick={() => updateLastDonationDate(rowData?.id)}
+          onClick={() => updateLastDonationDate(rowData?.id, rowData)}
           disabled={isAvailable(rowData?.lastDonationDate) ? false : true}
         >
           Now

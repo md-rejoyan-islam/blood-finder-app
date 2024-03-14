@@ -7,11 +7,13 @@ const ApiURL = import.meta.env.VITE_APP_URL;
 // add donar data
 export const addNewDonar = createAsyncThunk(
   "auth/addNewDonar",
-  async ({ fields, setLoading }) => {
+  async ({ fields, setLoading, clearFields, toggleModal }) => {
     try {
       const response = await axios.post(`${ApiURL}/api/v1/donars`, fields, {
         withCredentials: true,
       });
+      clearFields();
+      toggleModal();
       setLoading(false);
       return response.data;
     } catch (error) {
@@ -54,14 +56,16 @@ export const findDonarById = createAsyncThunk(
 // update donar data by id
 export const updateDonarById = createAsyncThunk(
   "auth/updateDonarById",
-  async ({ id, data, setLoading }) => {
+  async ({ id, data, setLoading, toggleModal }) => {
     try {
       const response = await axios.put(`${ApiURL}/api/v1/donars/${id}`, data, {
         withCredentials: true,
       });
       setLoading(false);
+      toggleModal && toggleModal();
       return response.data;
     } catch (error) {
+      console.log(error);
       setLoading(false);
       throw new Error(error.response.data.error.message);
     }

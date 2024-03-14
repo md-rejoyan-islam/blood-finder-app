@@ -14,6 +14,12 @@ const patientSlice = createSlice({
       ? JSON.parse(localStorage?.getItem("patients"))
       : [],
   },
+  reducers: {
+    setPatientMessageEmpty: (state) => {
+      state.message = null;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // get all patients
@@ -62,6 +68,9 @@ const patientSlice = createSlice({
 
 // selectors
 export const getPatientsData = (state) => state.patient;
+
+// actions
+export const { setPatientMessageEmpty } = patientSlice.actions;
 
 // exports
 export default patientSlice.reducer;

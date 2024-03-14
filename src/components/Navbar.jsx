@@ -139,7 +139,7 @@ export default function Navbar() {
                   </NavLink>
                   <NavLink
                     to={"/patient"}
-                    className="hover:bg-[#1f2937] text-white rounded-md px-3 py-2 text-sm font-medium"
+                    className="hover:bg-[#1f2937] text-white rounded-md px-3 py-2 text-sm font-medium relative"
                   >
                     Patient
                   </NavLink>

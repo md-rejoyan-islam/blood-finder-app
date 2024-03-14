@@ -21,9 +21,9 @@ export default function PatientForm({ data, toggleModal, title, type }) {
       phone: "",
       bloodGroup: "",
       location: "",
-      amount: "",
+      amount: 1,
       comment: "",
-      date: "",
+      date: new Date().toLocaleDateString().split("/").reverse().join("-"),
     }
   );
 
@@ -35,11 +35,18 @@ export default function PatientForm({ data, toggleModal, title, type }) {
     if (type === "add") {
       if (!phone) return toast.error("Phone is required");
       if (!bloodGroup) return toast.error("Blood Group is required");
-      if (!amount) return toast.error("Amount is required");
-      if (!date) return toast.error("Date is required");
+      if (!amount) {
+        fields.amount = 1;
+      }
+      if (!date) {
+        fields.date = new Date()
+          .toLocaleDateString()
+          .split("/")
+          .reverse()
+          .join("-");
+      }
       if (!location) return toast.error("Location is required");
     }
-
     // password length
     if (type === "p-update") {
       ("");
@@ -48,6 +55,7 @@ export default function PatientForm({ data, toggleModal, title, type }) {
     // update or add or change password
     if (data && type === "update") {
       // update user
+
       dispatch(
         updatePatientById({
           id: data.id,
@@ -86,14 +94,15 @@ export default function PatientForm({ data, toggleModal, title, type }) {
       {/* patient Phone  */}
       <div className={` my-3`}>
         <label className="pb-[2px] block" htmlFor="phone">
-          Patient Phone
+          Patient Phone{" "}
+          <span className="text-red-500 font-bold -ml-[2px]">*</span>
         </label>
         <input
           type="text"
           disabled={type === "update"}
           name="phone"
           id="phone"
-          value={fields.phone}
+          value={fields?.phone}
           onChange={handleChange}
           placeholder="01738XXXXXX"
           className="input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70] disabled:text-gray-500"
@@ -128,14 +137,13 @@ export default function PatientForm({ data, toggleModal, title, type }) {
       <div className={`${title === "Update User Password" && "hidden"} my-3`}>
         <label className="pb-[2px] block" htmlFor="amount">
           Amount of bag{" "}
-          <span className="text-red-500 font-bold -ml-[2px]">*</span>
         </label>
         <input
-          type="text"
+          type="number"
           id="amount"
           placeholder="2"
           name="amount"
-          value={fields.amount}
+          value={fields?.amount || 1}
           onChange={handleChange}
           className="input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70]"
         />
@@ -145,13 +153,15 @@ export default function PatientForm({ data, toggleModal, title, type }) {
       <div className={`${title === "Update User Password" && "hidden"} my-3`}>
         <label className="pb-[2px] block" htmlFor="date">
           Date
-          <span className="text-red-500 font-bold -ml-[2px]">*</span>
         </label>
         <input
           type="date"
           id="date"
           name="date"
-          value={fields.date}
+          value={
+            fields?.date ||
+            new Date().toLocaleDateString().split("/").reverse().join("-")
+          }
           onChange={handleChange}
           className="input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70]"
         />
@@ -160,13 +170,13 @@ export default function PatientForm({ data, toggleModal, title, type }) {
       {/* patient location  */}
       <div className="my-3">
         <label className="pb-[2px] block" htmlFor="location">
-          Location
+          Location <span className="text-red-500 font-bold -ml-[2px]">*</span>
         </label>
         <input
           type="text"
           name="location"
           id="location"
-          value={fields.location}
+          value={fields?.location}
           onChange={handleChange}
           placeholder="Ragib Rabeya Medical"
           className="input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70] disabled:text-gray-500"

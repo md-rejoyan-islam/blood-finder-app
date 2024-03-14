@@ -1,15 +1,16 @@
 import { toast } from "react-toastify";
 import useFormFields from "../../hooks/useFormFields";
 import { bdPhoneNumber, isEmail } from "../../helpers/helpers";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addNewDonar,
   updateDonarById,
 } from "../../features/donars/donarApiSlice";
-import { getDonars } from "../../features/donars/donarsSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import PropTypes from "prop-types";
+import { getAuthData } from "../../features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 export default function DonarForm({ data, toggleModal }) {
   const [loading, setLoading] = useState(false);
@@ -17,8 +18,8 @@ export default function DonarForm({ data, toggleModal }) {
   // dispatch
   const dispatch = useDispatch();
 
-  // donars data
-  const { message, error } = useSelector(getDonars);
+  // user
+  const { user } = useSelector(getAuthData);
 
   // fields
   const { fields, clearFields, handleChange } = useFormFields(
@@ -71,15 +72,26 @@ export default function DonarForm({ data, toggleModal }) {
     setLoading(true);
     // add or update donar
     if (data) {
-      // remove phone number
-      // delete fields.phone;
+      // if change last donation date and greater than 120 day then update total donation
+      if (
+        fields.lastDonationDate &&
+        new Date(fields.lastDonationDate) -
+          new Date(data.lastDonationDate).getTime() >
+          120 * 24 * 60 * 60 * 1000
+      ) {
+        console.log(data.lastDonationDate);
+        fields.totalDonation = fields.totalDonation
+          ? parseInt(fields.totalDonation) + 1
+          : 1;
+      }
 
-      // console.log(fields);
       // update donar data
-      dispatch(updateDonarById({ id: data.id, data: fields, setLoading }));
+      dispatch(
+        updateDonarById({ id: data.id, data: fields, setLoading, toggleModal })
+      );
     } else {
       // add new donar
-      dispatch(addNewDonar({ fields, setLoading }));
+      dispatch(addNewDonar({ fields, setLoading, clearFields, toggleModal }));
     }
   };
 
@@ -100,15 +112,6 @@ export default function DonarForm({ data, toggleModal }) {
       form.elements[index - 1].focus();
     }
   };
-
-  // message & error show toast
-  useEffect(() => {
-    if (message) {
-      toggleModal();
-      clearFields();
-      setLoading(false);
-    }
-  }, [message, error, dispatch, clearFields, toggleModal]);
 
   return (
     <form
@@ -146,6 +149,7 @@ export default function DonarForm({ data, toggleModal }) {
           value={fields?.phone || ""}
           onChange={handleChange}
           className=" input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70]"
+          disabled={user?.role === "moderator"}
         />
       </div>
       {/* blood group  */}
@@ -160,6 +164,7 @@ export default function DonarForm({ data, toggleModal }) {
           id="group"
           onChange={handleChange}
           defaultValue={fields?.bloodGroup}
+          disabled={user?.role === "moderator"}
         >
           <option>--select--</option>
           <option defaultValue="A+">A+</option>
@@ -260,6 +265,8 @@ export default function DonarForm({ data, toggleModal }) {
           onChange={handleChange}
           className="input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70]"
           max={new Date().toISOString().split("T")[0]}
+          disabled={user?.role === "moderator"}
+          // min={fields?.lastDonationDate ? fields?.lastDonationDate : ""}
         />
       </div>
       {/* donar age */}
