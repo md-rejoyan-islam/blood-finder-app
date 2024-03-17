@@ -32,18 +32,16 @@ export default function Login() {
 
   // handle keydown
   const handleKeyDown = (e) => {
+    const form = e.target.form;
+    const index = Array.prototype.indexOf.call(form, e.target);
     // when press enter go to next input
     if (e.key === "Enter" && e.target.type !== "submit") {
       e.preventDefault();
-      const form = e.target.form;
-      const index = Array.prototype.indexOf.call(form, e.target);
       form.elements[index + 1].focus();
     }
     // when backspace press go to previous input
     if (e.key === "Backspace" && e.target.value === "") {
       e.preventDefault();
-      const form = e.target.form;
-      const index = Array.prototype.indexOf.call(form, e.target);
       form.elements[index - 1].focus();
     }
   };
