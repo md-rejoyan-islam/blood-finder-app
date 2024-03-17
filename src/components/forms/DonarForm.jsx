@@ -97,18 +97,16 @@ export default function DonarForm({ data, toggleModal }) {
 
   // handle keydown
   const handleKeyDown = (e) => {
+    const form = e.target.form;
+    const index = Array.prototype.indexOf.call(form, e.target);
     // when press enter go to next input
     if (e.key === "Enter" && e.target.type !== "submit") {
       e.preventDefault();
-      const form = e.target.form;
-      const index = Array.prototype.indexOf.call(form, e.target);
       form.elements[index + 1].focus();
     }
     // when backspace press go to previous input
     if (e.key === "Backspace" && e.target.value === "") {
       e.preventDefault();
-      const form = e.target.form;
-      const index = Array.prototype.indexOf.call(form, e.target);
       form.elements[index - 1].focus();
     }
   };
@@ -149,7 +147,7 @@ export default function DonarForm({ data, toggleModal }) {
           value={fields?.phone || ""}
           onChange={handleChange}
           className=" input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70]"
-          disabled={user?.role === "moderator"}
+          disabled={data && user?.role === "moderator"}
         />
       </div>
       {/* blood group  */}
@@ -164,7 +162,7 @@ export default function DonarForm({ data, toggleModal }) {
           id="group"
           onChange={handleChange}
           defaultValue={fields?.bloodGroup}
-          disabled={user?.role === "moderator"}
+          disabled={data && user?.role === "moderator"}
         >
           <option>--select--</option>
           <option defaultValue="A+">A+</option>
@@ -265,7 +263,7 @@ export default function DonarForm({ data, toggleModal }) {
           onChange={handleChange}
           className="input w-full py-[10px] px-3 border-general rounded-md border bg-[#1e293b70]"
           max={new Date().toISOString().split("T")[0]}
-          disabled={user?.role === "moderator"}
+          disabled={data && user?.role === "moderator"}
           // min={fields?.lastDonationDate ? fields?.lastDonationDate : ""}
         />
       </div>

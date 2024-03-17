@@ -71,16 +71,17 @@ export default function PatientForm({ data, toggleModal, title, type }) {
   };
 
   // handle key down
-  const hanleKeyDown = (event) => {
-    const form = event.target.form;
-    const index = Array.prototype.indexOf.call(form, event.target);
-
-    // if press enter go to next input
-    if (event.key === "Enter" && event.target.type !== "submit") {
+  const hanleKeyDown = (e) => {
+    const form = e.target.form;
+    const index = Array.prototype.indexOf.call(form, e.target);
+    // when press enter go to next input
+    if (e.key === "Enter" && e.target.type !== "submit") {
+      e.preventDefault();
       form.elements[index + 1].focus();
     }
-    // if press backspace go to previous input
-    if (event.key === "Backspace" && event.target.value === "") {
+    // when backspace press go to previous input
+    if (e.key === "Backspace" && e.target.value === "") {
+      e.preventDefault();
       form.elements[index - 1].focus();
     }
   };
