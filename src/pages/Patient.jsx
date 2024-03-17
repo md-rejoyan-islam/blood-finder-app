@@ -35,11 +35,11 @@ export default function Patient() {
     Swal.fire({
       title: "Are you sure to delete this patient?",
       showCancelButton: true,
-      confirmButtonText: "Save",
+      confirmButtonText: "Confirm",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deletePatientById(id));
-        Swal.fire("Suceessfully Deletd", "", "success");
+        Swal.fire("Suceessfully deleted", "", "success");
       }
     });
   };
@@ -146,6 +146,14 @@ export default function Patient() {
                   <Column field="location" sortable header="Location" />
                   <Column field="amount" sortable header="Amount" />
                   <Column field="date" sortable header="Date" />
+                  <Column
+                    field="editedBy"
+                    sortable
+                    header="Edited By"
+                    style={{
+                      fontSize: "12px",
+                    }}
+                  />
                   <Column
                     field="comment"
                     sortable

@@ -23,8 +23,8 @@ const patientSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // get all patients
-      .addCase(allPatient.rejected, (state, action) => {
-        state.error = action.error.message;
+      .addCase(allPatient.rejected, () => {
+        // state.error = action.error.message;
       })
       .addCase(allPatient.fulfilled, (state, action) => {
         state.patients = action.payload.data;

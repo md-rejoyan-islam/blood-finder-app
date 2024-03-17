@@ -4,6 +4,7 @@ import { InputText } from "primereact/inputtext";
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { isAvailable } from "../../helpers/helpers";
+import { getPhone, giveIndex } from "../../helpers/utils";
 
 function SummaryTable({ history }) {
   // filters state
@@ -67,11 +68,6 @@ function SummaryTable({ history }) {
   };
   const header = renderHeader();
 
-  // give index
-  const giveIndex = (rowData, column) => {
-    return column.rowIndex + 1;
-  };
-
   // available donar
   const availableData = (rowData) => {
     return isAvailable(rowData?.lastDonationDate) ? (
@@ -82,20 +78,6 @@ function SummaryTable({ history }) {
       <span className="w-4 h-4  rounded-full bg-red-500 inline-block">
         <span className="hidden">Not</span>
       </span>
-    );
-  };
-
-  // get phone
-  const getPhone = (rowData) => {
-    return (
-      <a
-        href="tel:01738428141"
-        className="text-sm lg:text-base hover:text-blue-500 hover:underline"
-      >
-        {rowData?.phone || (
-          <span className="text-[11px] text-red-400">N/A</span>
-        )}
-      </a>
     );
   };
 
@@ -142,6 +124,14 @@ function SummaryTable({ history }) {
               sortField="phone"
               header="Phone"
             ></Column>
+            <Column
+              field="editedBy"
+              sortable
+              header="Added By"
+              style={{
+                fontSize: "12px",
+              }}
+            />
             <Column body={availableData} sortable header="Available" />
             <Column
               field="lastDonationDate"

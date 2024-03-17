@@ -39,7 +39,7 @@ function UserTable() {
     Swal.fire({
       title: "Are you sure to delete this user?",
       showCancelButton: true,
-      confirmButtonText: "Save",
+      confirmButtonText: "Confirm",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteUserById(id));

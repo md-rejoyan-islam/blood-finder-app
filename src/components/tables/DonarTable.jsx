@@ -43,9 +43,9 @@ export default function DonarTable() {
     const ids = selectedProducts?.map((product) => product.id);
 
     Swal.fire({
-      title: "Are you sure to delete these users?",
+      title: "Are you sure to delete these donars?",
       showCancelButton: true,
-      confirmButtonText: "Save",
+      confirmButtonText: "Confirm",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(
@@ -53,7 +53,7 @@ export default function DonarTable() {
             ids,
           })
         );
-        Swal.fire("Suceessfully Deletd", "", "success");
+        Swal.fire("Suceessfully deleted", "", "success");
         const updatedData = donars.filter(
           (donar) => !selectedProducts?.includes(donar)
         );
@@ -155,13 +155,13 @@ export default function DonarTable() {
   // handle delete
   const handleDelete = (id) => {
     Swal.fire({
-      title: "Are you sure to delete this user?",
+      title: "Are you sure to delete this donar?",
       showCancelButton: true,
-      confirmButtonText: "Save",
+      confirmButtonText: "Confirm",
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteDonarById(id));
-        Swal.fire("Suceessfully Deletd", "", "success");
+        Swal.fire("Suceessfully deleted", "", "success");
         const updatedData = donars.filter((donar) => donar.id !== id);
         setFilters(updatedData);
       }
@@ -304,6 +304,14 @@ export default function DonarTable() {
             <Column field="session" sortable header="Session" />
             <Column field="email" sortable header="Email" />
             <Column field="age" sortable header="Age" />
+            <Column
+              field="lastEditedBy"
+              sortable
+              header="Edited By"
+              style={{
+                fontSize: "12px",
+              }}
+            />
             <Column field="comment" sortable header="Comment" />
           </DataTable>
         </div>
