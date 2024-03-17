@@ -166,7 +166,7 @@ export default function Navbar() {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       version="1.1"
-                      className=" w-8 p-1  ml-[2px] text-center  rounded-full "
+                      className=" w-8 p-1  ml-[5px] text-center  rounded-full "
                       x="0"
                       y="0"
                       viewBox="0 0 512 512.002"
