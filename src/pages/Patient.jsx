@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
-import { getAuthData } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { deletePatientById } from "../features/patient/patientApiSlice";
 import { getPatientsData } from "../features/patient/patientSlice";
@@ -19,9 +18,6 @@ export default function Patient() {
     open: false,
     data: null,
   });
-
-  // logged in user
-  const { user: loginUser } = useSelector(getAuthData);
 
   // pateints data
   const { patients } = useSelector(getPatientsData);
@@ -47,11 +43,7 @@ export default function Patient() {
   // get action
   const actions = (rowData) => {
     return (
-      <div
-        className={`${
-          !["admin", "superadmin"]?.includes(loginUser?.role) && "hidden"
-        }  primary-highlighter font-medium text-white flex items-center gap-2 justify-center`}
-      >
+      <div className="primary-highlighter font-medium text-white flex items-center gap-2 justify-center">
         <button
           className="text-sm rounded-[4px] px-2 py-[2px] bg-violet-500 hover:bg-blue-500"
           onClick={() =>

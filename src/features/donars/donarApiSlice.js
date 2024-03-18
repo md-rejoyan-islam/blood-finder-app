@@ -26,12 +26,9 @@ export const addNewDonar = createAsyncThunk(
 // all donars
 export const allDonars = createAsyncThunk("auth/allDonars", async () => {
   try {
-    const response = await axios.get(
-      `${ApiURL}/api/v1/donars?sort=lastDonationDate`,
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.get(`${ApiURL}/api/v1/donars`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.error.message);
