@@ -295,9 +295,10 @@ export default function DonarTable() {
               header="Phone"
             />
             <Column body={availableData} sortable header="Available" />
-            <Column field="lastDonationDate" sortable header="Last Donation" />
             <Column field={donated} sortable header="Donated" />
-            <Column body={actions} sortable header="Action"></Column>
+            <Column body={actions} sortable header="Action" />
+            <Column field="comment" sortable header="Comment" />
+            <Column field="lastDonationDate" sortable header="Last Donation" />
             <Column field="totalDonation" sortable header="Total Donation" />
             <Column field="homeDistrict" sortable header="Address" />
             <Column field="department" sortable header="Department" />
@@ -312,7 +313,6 @@ export default function DonarTable() {
                 fontSize: "12px",
               }}
             />
-            <Column field="comment" sortable header="Comment" />
           </DataTable>
         </div>
       </div>
